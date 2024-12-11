@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from dialog_bot import views
 
 app_name = 'dialog_bot'
 urlpatterns = [

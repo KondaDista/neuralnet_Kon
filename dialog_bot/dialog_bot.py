@@ -40,7 +40,7 @@ class DialogBotRuGPTSmall:
 
             context_with_response = [self.tokenizer.decode(sample_token_ids) for sample_token_ids in
                                      generated_token_ids]
-            answer = context_with_response[0].split("@@SECOND@@")[-1].replace("@@FIRST@@", "")
+            answer = context_with_response[0].split("@@ВТОРОЙ@@")[-1].replace("@@ПЕРВЫЙ@@", "")
             filtered_answer = [letter for letter in answer if letter in self.rus_alphabet
                                or letter in self.en_alphabet or letter in self.symbols]
             filtered_answer = "".join(filtered_answer).strip()
