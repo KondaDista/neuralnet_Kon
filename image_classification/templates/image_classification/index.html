@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% load static %}
+    {% if tasks_list %}
+        <ul>
+            {% for task in tasks_list %}
+                <li><a href="{% url 'image_classification:detail' task.id %}">{{ task.task_name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No tasks are available.</p>
+    {% endif %}
+{% endblock %}

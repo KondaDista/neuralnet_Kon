@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ task.task_name }}{% endblock %}
+
+{% block content %}
+    <h2>{{ task.task_name }}</h2>
+    <form action="{% url 'image_classification:index' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Back</button>
+    </form>
+    <hr>
+    {% if latest_predictions %}
+        {% for p in latest_predictions %}
+            <p>
+                <strong>Image</strong><br>
+                <img src="{{ p.image.url }}" alt="img" style="max-height:300px"><br>
+                <strong>Prediction:</strong>
+            <pre>{{ p.image_class }}</pre>
+            </p>
+        {% endfor %}
+    {% else %}
+        No results.
+    {% endif %}
+    </hr>
+    <form action="{% url 'image_classification:predict' task.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+{% endblock %}

@@ -14,16 +14,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
-from neuralnet_Kon import views
+from neuralnet_Kon import views, settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('bert_classifier/', include('bert_classifier.urls')),
     path('dialog_bot/', include('dialog_bot.urls')),
-    #path('image_classification/', include('image_classification.urls')),
+    path('image_classification/', include('image_classification.urls')),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
